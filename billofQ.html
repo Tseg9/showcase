@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Quantity Estimator</title>
+    <link rel="stylesheet" href="css">
+</head>
+<style>
+ body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.calculator-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.disclaimer {
+    font-size: 0.9em;
+    color: #888;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.input-group input[type="number"] {
+    width: calc(100% - 22px); /* Adjust for padding/border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.results-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9f5ff;
+    border: 1px solid #b8d Hff;
+    border-radius: 5px;
+}
+
+.results-container h2 {
+    margin-top: 0;
+    color: #0056b3;
+    text-align: left;
+    border-bottom: 1px solid #b8d Hff;
+    padding-bottom: 10px;
+}
+
+.results-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.results-container li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.results-container li span {
+    font-weight: bold;
+    color: #333;
+}
+
+.assumptions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dotted #ccc;
+}
+
+.assumptions h3 {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.assumptions ul {
+    font-size: 0.9em;
+    color: #777;
+    padding-left: 20px; /* Indent assumption list */
+    list-style: disc;
+}
+
+.assumptions li {
+    margin-bottom: 5px;
+    font-size: inherit; /* Inherit size from parent ul */
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    border: 1px solid #D8000C;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+</style>
+<body>
+    <div class="calculator-container">
+        <h1>Simple Building Quantity Estimator<br>By TsegCode</h1>
+        <p class="disclaimer">Note from Tsegcoder: This provides a ROUGH estimate based on simple dimensions and standard assumptions. Not for final BoQ.</p>
+
+        <form id="quantity-form">
+            <div class="input-group">
+                <label for="length">Length (m):</label>
+                <input type="number" id="length" step="any" placeholder="e.g., 10" required>
+            </div>
+            <div class="input-group">
+                <label for="width">Width (m):</label>
+                <input type="number" id="width" step="any" placeholder="e.g., 8" required>
+            </div>
+            <div class="input-group">
+                <label for="height">Height (m):</label>
+                <input type="number" id="height" step="any" placeholder="e.g., 3" required>
+            </div>
+
+            <button type="submit">Calculate Quantities</button>
+        </form>
+
+        <div id="results" class="results-container" style="display: none;">
+            <h2>Estimated Quantities:</h2>
+            <ul>
+                <li><strong>Bricks:</strong> <span id="bricks-result">---</span> units</li>
+                <li><strong>Cement:</strong> <span id="cement-result">---</span> bags (50kg)</li>
+                <li><strong>Sand:</strong> <span id="sand-result">---</span> m³</li>
+                <li><strong>Aggregate (Gravel):</strong> <span id="aggregate-result">---</span> m³</li>
+                <li><strong>Steel Reinforcement:</strong> <span id="steel-result">---</span> kg</li>
+            </ul>
+            <div class="assumptions">
+                <h3>Based on Assumptions:</h3>
+                <ul>
+                    <li>Wall Thickness: 0.25m - Used for brick calculation.</li>
+                    <li>Brick Size (with mortar): 400mm x 200mm x 200mm</li>
+                    <li>Concrete Mix: M20 (1:2:3) - Used for Cement, Sand, Aggregate.</li>
+                    <li>Concrete Volume: Calculated as L x W x H (Simplified - assumes solid block).</li>
+                    <li>Steel Percentage: 1% of Concrete Volume (Typical for RCC).</li>
+                    <li>Material Densities: Cement=1440kg/m³, Steel=7850kg/m³.</li>
+                    <li>Wastage included (approx): Bricks 5%, Cement 3%, Sand/Aggregate 12%, Steel 5%.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="error-message" class="error" style="display: none;"></div>
+    </div>
+
+    <script>
+     document.getElementById('quantity-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent page reload
+
+    // Get input values
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const height = parseFloat(document.getElementById('height').value);
+
+    const resultsDiv = document.getElementById('results');
+    const errorDiv = document.getElementById('error-message');
+
+    // --- Clear previous results and errors ---
+    resultsDiv.style.display = 'none';
+    errorDiv.style.display = 'none';
+    errorDiv.textContent = '';
+    document.getElementById('bricks-result').textContent = '---';
+    document.getElementById('cement-result').textContent = '---';
+    document.getElementById('sand-result').textContent = '---';
+    document.getElementById('aggregate-result').textContent = '---';
+    document.getElementById('steel-result').textContent = '---';
+
+    // --- Input Validation ---
+    if (isNaN(length) || isNaN(width) || isNaN(height) || length <= 0 || width <= 0 || height <= 0) {
+        errorDiv.textContent = 'Please enter valid positive numbers for all dimensions.';
+        errorDiv.style.display = 'block';
+        return; // Stop calculation
+    }
+
+    // --- Constants & Assumptions (MODIFY THESE AS NEEDED) ---
+    const WALL_THICKNESS_M = 0.23; // Assuming 9-inch walls (approx 0.23m)
+    const BRICK_VOL_WITH_MORTAR_M3 = 0.40 * 0.20 * 0.20; // Standard brick 400x200x200 + 10mm mortar
+    const BRICK_WASTAGE_FACTOR = 1.05; // 5% wastage
+
+    // Concrete Assumptions (M25 Mix Ratio 1:2:3)
+    const CEMENT_RATIO = 1;
+    const SAND_RATIO = 2;
+    const AGGREGATE_RATIO = 3;
+    const SUM_OF_RATIOS = CEMENT_RATIO + SAND_RATIO + AGGREGATE_RATIO;
+    const DRY_VOLUME_FACTOR = 1.54; // To convert wet volume to dry volume for concrete ingredients
+    const CEMENT_DENSITY_KG_M3 = 1440;
+    const CEMENT_BAG_WEIGHT_KG = 50;
+    const CEMENT_WASTAGE_FACTOR = 1.03; // 3% wastage
+    const SAND_AGGREGATE_WASTAGE_FACTOR = 1.12; // 12% wastage
+
+    // Steel Reinforcement Assumptions
+    const STEEL_PERCENTAGE = 0.01; // Assuming 1% steel in RCC volume
+    const STEEL_DENSITY_KG_M3 = 7850;
+    const STEEL_WASTAGE_FACTOR = 1; // 5% wastage for lapping/cutting
+
+    // --- Calculations ---
+
+    // 1. Brick Calculation (Simplified: Perimeter * Height * Thickness)
+    const perimeter = 2 * (length + width);
+    const wallVolume = perimeter * height * WALL_THICKNESS_M;
+    // Note: This doesn't subtract openings and assumes all perimeter walls are brick.
+    const numberOfBricks = (wallVolume / BRICK_VOL_WITH_MORTAR_M3) * BRICK_WASTAGE_FACTOR;
+
+    // 2. Concrete Calculation (Simplified: Total L*W*H as concrete volume)
+    // This is a MAJOR simplification. In reality, you'd calculate slab, beams, columns separately.
+    const totalConcreteVolumeWet = length * width * height; // Using overall volume as proxy
+    const totalConcreteVolumeDry = totalConcreteVolumeWet * DRY_VOLUME_FACTOR;
+
+    // 3. Cement Calculation
+    const cementVolumeM3 = (totalConcreteVolumeDry * CEMENT_RATIO) / SUM_OF_RATIOS;
+    const cementWeightKg = cementVolumeM3 * CEMENT_DENSITY_KG_M3;
+    const numberOfCementBags = (cementWeightKg / CEMENT_BAG_WEIGHT_KG) * CEMENT_WASTAGE_FACTOR;
+
+    // 4. Sand Calculation
+    const sandVolumeM3 = ((totalConcreteVolumeDry * SAND_RATIO) / SUM_OF_RATIOS) * SAND_AGGREGATE_WASTAGE_FACTOR;
+
+    // 5. Aggregate Calculation
+    const aggregateVolumeM3 = ((totalConcreteVolumeDry * AGGREGATE_RATIO) / SUM_OF_RATIOS) * SAND_AGGREGATE_WASTAGE_FACTOR;
+
+    // 6. Steel Calculation (Based on total concrete volume proxy)
+    const steelVolumeM3 = totalConcreteVolumeWet * STEEL_PERCENTAGE; // Based on wet volume
+    const steelWeightKg = (steelVolumeM3 * STEEL_DENSITY_KG_M3) * STEEL_WASTAGE_FACTOR;
+
+
+    // --- Display Results ---
+    document.getElementById('bricks-result').textContent = Math.ceil(numberOfBricks).toLocaleString(); // Round up bricks
+    document.getElementById('cement-result').textContent = Math.ceil(numberOfCementBags).toLocaleString(); // Round up bags
+    document.getElementById('sand-result').textContent = sandVolumeM3.toFixed(2);
+    document.getElementById('aggregate-result').textContent = aggregateVolumeM3.toFixed(2);
+    document.getElementById('steel-result').textContent = steelWeightKg.toFixed(2);
+
+    resultsDiv.style.display = 'block'; // Show the results section
+});
+    </script>
+</body>
+</html>

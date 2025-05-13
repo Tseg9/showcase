@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    
+    <title>2D img slider</title>
+  </head>
+  <style>
+  body {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgba(123 123  0.89);
+  }
+    .slider {
+      position:absolute;
+      width:100px;
+      height:100px;
+      border-radius: 10px;
+      box-shadow: rgba(27,52,252,0.565);
+      background: violet;
+      animation-name: slider;
+      animation-duration: 5s;
+      animation-timing-function:linear;
+      animation-delay:2s;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+    
+    }
+      @keyframes slider{
+      0%{
+        background-color: violet; left:0px; top:0px;
+      }
+      25%{
+        background-color: green; left:700px; top:0px; border-radius:50%;
+        scale: 1.5;
+      }
+      50%{
+        background-color: yellow; left:700px; top:1100px; border-radius:50%;
+        scale: 1.5;
+      }
+      75%{
+        background-color: red; left:0px; top:1100px; border-radius:50%;
+        scale: 1.5;
+      }
+      100%{
+        background-color:violet; left:0px; top:0px;
+      }
+    }
+    
+    
+    
+    .slider2{
+      position: absolute;
+      margin: 200x;
+      width:100px;
+      height:100px;
+      border-radius: 10px;
+      box-shadow: rgba(27,52,252,0.565);
+      background: #cdffff;
+      animation-name: slider2;
+      animation-duration: 5s;
+      animation-timing-function:linear;
+      animation-delay:2s;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+    }
+    @keyframes slider2{
+      0%{
+        background-color: #cdffff; left:200px; top:200px;
+      }
+      25%{
+        background-color: #ccff; left:500px; top:200px; border-radius:50%;
+        scale: 1.5;
+      }
+      50%{
+        background-color: indigo; left:500px; top:900px; border-radius:50%;
+        scale: 1.5;
+      }
+      75%{
+        background-color: purple; left:200px; top:900px; border-radius:50%;
+        scale: 1.5;
+      }
+      100%{
+        background-color:violet; left:200px; top:200px;
+      }
+    }
+  </style>
+  <body>
+    <div class = "slider"></div><br><br>
+    <div class="slider2"></div>
+  </body>
+</html>

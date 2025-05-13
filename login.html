@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,intial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>neumorphic sign in</title>
+</head>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+    font-family: Arial, sans-serif;
+ }
+  .neumorphic{
+    background: #e0e5ec;
+    border-radius: 20px;
+    box-shadow: 20px 20px 30px #a3b1c6, -20px -20px 30px #ffffff;
+   
+  }
+  /* outer shadow and inner light*/
+  .neumorphic-inset {
+    background: #e0e5ec;
+    border-radius: 20px;
+    box-shadow: inset 20px 20px 30px #a3b1c6, inset -20px -20px 30px #ffffff;
+   
+  }
+  .neumorphic-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+   
+  }
+  .neumorphic-input{
+    padding: 15px;
+    width: 80%;
+    font-size: 16px;
+    color: #6d7582;
+    border: none;
+    outline: none;
+    margin-bottom: 25px;
+  }
+  h1{
+   color:orange;
+  }
+  .neumorphic-input::placeholder{
+      color: #6d7560;
+  }
+  .neumorphic-button{
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #6d7582;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .neumorphic-button:active{
+   box-shadow: inset 5px 5px 10px #a3b1cb, inset -5px -5px 10px #ffffff;
+   
+  }
+</style>
+<body>
+  <div class=" neumorphic neumorphic-card">
+    <h1>Login To Your Any Social Media Acount</h1>
+    <input type="text" class="neumorphic neumorphic-input" placeholder="Enter your any acount/Email/facebo/youtu/others">
+    <input type="password" class="neumorphic neumorphic-input" placeholder="Enter password">
+    <button class="neumorphic neumorphic-button">Sign In</button>
+  </div>
+</body>
+</html>

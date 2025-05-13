@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,intial-scale=1.0">
+    <title>3dside</title>
+    <link rel="stylesheet" href="styl.css">
+ </head>
+ <style>
+  *{
+ margin:0;
+ padding:0;
+ box-sizing: border-box;
+}
+body{
+ height: 100vh;
+ margin: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: #000;
+}
+
+.cube{
+ display: flex;
+ position: absolute;
+ justify-content: center;
+ align-items: center;
+ width:500px;
+ height: 500px;
+ border: 5px solid #0ff;
+ box-shadow: 0 0 25px #0ff, 0 0 60px #0ff;
+ border-radius: 50%;
+}
+.cube img{
+ width: 500px;
+ height: 500px;
+ border-radius: 50%;
+ background-attachment: fixed;
+ background-position: center;
+ background-repeat: no-repeat;
+}
+ span{
+  width: 600px;
+ height: 600px;
+ border: 25px dotted #0ff;
+ box-shadow: 0 0 10px #0ff, 0 0 15px #0ff;
+ position: absolute;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ color: #0ff;
+ font-family: 'Courier New', Monospace;
+ font-weight: 4.5rem;
+ text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+ animation: spin 3s linear infinite;
+}
+
+@keyframes spin{
+ 0%{transform: rotate(0deg); }
+ 100%{transform: rotate(360deg);}
+}
+ </style>
+ <body>
+  <div class="cube"><img src="sars19.jpg"></div>
+   <span>I don't know Why Nature<br>Choose Some of Us To Teach<br>Hard Lesson In Life<br>In This short period of My Life That What I Been <br>Through Is Unforgetable</span>
+    
+
+    
+ </body>
+ </html>

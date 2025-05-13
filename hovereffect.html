@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS Sphere</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+ 
+  .sphere {
+    width: 100px; /* Diameter */
+    height: 100px; /* Diameter */
+    border-radius: 50%; /* Makes it a circle */
+    background: radial-gradient(
+      circle at 30% 30%, /* Position of the highlight (top-leftish) */
+      #ffffff,          /* Highlight color (white) */
+      #6495ED 80%,       /* Main color (cornflower blue), starting transition at 80% */
+      #104E8B          /* Darker shadow color at the edge */
+    );
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3), /* Optional: Drop shadow */
+                inset -5px -5px 15px rgba(0,0,0,0.2); /* Optional: Inner shadow for depth */
+    
+  
+            
+  }
+  .sphere:hover {
+   transform: rotate(360deg) scale(7);
+   transition: 20s;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="sphere">Touch Me</div>
+
+</body>
+</html>

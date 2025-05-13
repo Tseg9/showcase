@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,intial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <style>
+   *{
+		 margin: 5px;
+		 padding:0;
+		 font-family: 'popplns', sans-serif;
+		 box-sizing: border-box;
+  }
+  h1 {
+		  align-content: center;
+		  align-items: center;
+		  background-color: rgba(179,65,1,0.142);
+		  margin-left: 200px;
+		  display: inline;
+		
+  }
+  h2 {
+		 align-content: center;
+		 margin-left: 200px;
+		 background-color: rgba(104,0,6,0.392);
+		 display: inline;
+  }
+  #calculator {
+		font-family: Arial, Sans-serif;
+		margin: 0;
+		justify-content: center;
+		align-items: center;
+		background-image: url('backg6.png');
+		background-repeat: repeat;
+		background-position: center;
+		background-attachment: fixed;
+		object-fit: cover;
+		border-radius: 50px;
+		overflow: hidden;
+  }
+  #display{
+  margin: 20px 20px;
+		width: 87%;
+		border-radius: 7px;
+		padding: 20px;
+		font-size: 4rem;
+		font-color: wight;
+		text-align: left;
+		border: none;
+		background-color: white;
+		opacity: 0.3;
+  }
+  #keys{
+		display: grid;
+		grid-template-columns: repeat(4, 1fr );
+		gap: 10px;
+		padding: 25px;
+  }
+  button {
+		width: 100px;
+		height: 100px;
+		border-radius: 15px;
+		border:none;
+		background-color: burlywood;
+		color: green;
+		font-size: 4rem;
+		font-weight: bold;
+  }
+  .oprater-btn {
+		background-color: brown;
+  }
+  </style>
+
+     <header>
+         <h1>@TsegCalculater</h1>
+     </header>
+  <body>
+
+    <div id="calculator">
+     <input id="display" readonly>
+      <div id="keys">
+        
+        <button onclick="appendToDisplay('+')" class="oprater-btn">+</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('-')" class="oprater-btn">-</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('4')">4</button> 
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('*')"class="oprater-btn">*</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('/')"class="oprater-btn">/</button>
+        <button onclick="calculate('=')"class ="oprater-btn">=</button>
+        <button onclick="clearDisplay('C')"class="oprater-btn">C</button>
+        <button onclick="appendToDisplay('9')">9</button>
+      </div>
+    </div>
+      <script>
+         const display = document.getElementById("display");
+
+  function appendToDisplay(input){
+    display.value += input;
+  }
+  function clearDisplay() {
+    display.value = "";
+  }
+
+  function calculate(){
+    try{
+         display.value = eval(display.value);
+    }
+    
+    catch (error){
+        display.value = "what would you want to do? plc hit C";
+    }
+  }
+
+      </script>
+  </body>
+</html>
+
+      

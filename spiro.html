@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Spirograph Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+ body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Black background */
+    overflow: hidden;
+}
+
+.spirograph-container {
+    width: 80vmin; /* Use viewport units for responsiveness */
+    height: 80vmin;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Creates the central bright spot fading to red */
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 0, 0.9) 0%,  /* Bright Yellow center */
+        rgba(255, 165, 0, 0.8) 15%, /* Orange */
+        rgba(255, 69, 0, 0.6) 30%,  /* Red-Orange */
+        rgba(139, 0, 0, 0.3) 50%,   /* Dark Red */
+        rgba(0, 0, 0, 0) 70%        /* Fade to transparent */
+    );
+    z-index: 1; /* Glow is behind the layers */
+}
+
+.layer {
+    position: absolute;
+    border-style: dotted; /* Use dotted lines to simulate dots */
+    border-color: rgba(255, 220, 150, 0.5); /* Light, semi-transparent yellow/orange */
+    border-width: 2px; /* Adjust dot size */
+    border-radius: 50%; /* Make it circular */
+    transform-origin: center center; /* Rotate around the center */
+    animation: rotate linear infinite; /* Apply rotation animation */
+    z-index: 2; /* Layers are above the glow */
+}
+
+/* Define sizes and animation speeds for different layers */
+/* Varying speeds create the interference/spirograph effect */
+
+.layer-1 { width: 10%; height: 10%; animation-duration: 8s; }
+.layer-2 { width: 15%; height: 15%; animation-duration: 9s; animation-direction: reverse; }
+.layer-3 { width: 20%; height: 20%; animation-duration: 10s; border-width: 2.5px; }
+.layer-4 { width: 25%; height: 25%; animation-duration: 11s; animation-direction: reverse; }
+.layer-5 { width: 30%; height: 30%; animation-duration: 12s; }
+.layer-6 { width: 35%; height: 35%; animation-duration: 13s; animation-direction: reverse; border-width: 3px; }
+.layer-7 { width: 40%; height: 40%; animation-duration: 14s; }
+.layer-8 { width: 45%; height: 45%; animation-duration: 15s; animation-direction: reverse; }
+.layer-9 { width: 50%; height: 50%; animation-duration: 16s; border-width: 3.5px; }
+.layer-10 { width: 55%; height: 55%; animation-duration: 17s; animation-direction: reverse; }
+.layer-11 { width: 60%; height: 60%; animation-duration: 18s; }
+.layer-12 { width: 65%; height: 65%; animation-duration: 19s; animation-direction: reverse; border-width: 4px; }
+.layer-13 { width: 70%; height: 70%; animation-duration: 20s; }
+.layer-14 { width: 75%; height: 75%; animation-duration: 21s; animation-direction: reverse; }
+.layer-15 { width: 80%; height: 80%; animation-duration: 22s; border-width: 4.5px; }
+.layer-16 { width: 85%; height: 85%; animation-duration: 23s; border-width: 3.5px; }
+.layer-17 { width: 90%; height: 90%; animation-duration: 24s; animation-direction: reverse; }
+.layer-18 { width: 95%; height: 95%; animation-duration: 25s; }
+.layer-19 { width: 100%; height: 100%; animation-duration: 26s; animation-direction: reverse; border-width: 4px; }
+.layer-20 { width: 110%; height: 110%; animation-duration: 27s; }
+.layer-21 { width: 75%; height: 75%; animation-duration: 28s; animation-direction: reverse; }
+.layer-22 { width: 80%; height: 80%; animation-duration: 29s; border-width: 4.5px; }
+
+/* Define the rotation keyframes */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>
+<body>
+    <div class="spirograph-container">
+        <!-- Base radial gradient for the core glow -->
+        <div class="glow"></div>
+
+        <!-- Multiple rotating layers with dotted borders -->
+        <div class="layer layer-1"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-3"></div>
+        <div class="layer layer-4"></div>
+        <div class="layer layer-5"></div>
+        <div class="layer layer-6"></div>
+        <div class="layer layer-7"></div>
+        <div class="layer layer-8"></div>
+        <!-- Add more layers for complexity -->
+        <div class="layer layer-9"></div>
+        <div class="layer layer-10"></div>
+        <div class="layer layer-11"></div>
+        <div class="layer layer-12"></div>
+         <div class="layer layer-13"></div>
+        <div class="layer layer-14"></div>
+        <div class="layer layer-15"></div>
+        <div class="layer layer-16"></div>
+        <div class="layer layer-17"></div>
+        <div class="layer layer-18"></div>
+        <div class="layer layer-19"></div>
+         <div class="layer layer-20"></div>
+        <div class="layer layer-21"></div>
+        <div class="layer layer-22"></div>
+    </div>
+</body>
+</html>

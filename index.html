@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Code Showcase</title>
+    <style>
+        /* Basic Reset */
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6; /* Light grayish background */
+            color: #333;
+            display: flex; /* For sidebar and main content layout */
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark blue gradient */
+            color: #ecf0f1; /* Light text color */
+            padding: 25px 15px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #4a6278;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.8em;
+            color: #f1c40f; /* Accent color for title */
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            color: #bdc3c7; /* Lighter subtitle */
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li a {
+            display: block;
+            padding: 12px 15px;
+            color: #ecf0f1;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .sidebar nav ul li a:hover,
+        .sidebar nav ul li a:focus {
+            background-color: #4a6278; /* Slightly lighter dark blue */
+            padding-left: 20px; /* Indent on hover */
+            color: #ffffff;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1; /* Takes remaining space */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2980b9); /* Blue gradient */
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+
+        .hero .cta-button { /* Call to action button (optional) */
+            display: inline-block;
+            background-color: #f1c40f; /* Yellow accent */
+            color: #2c3e50; /* Dark text on yellow */
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .hero .cta-button:hover {
+            background-color: #f39c12; /* Darker yellow */
+            transform: translateY(-2px);
+        }
+
+        /* Iframe for Content */
+        .content-frame-container {
+            flex-grow: 1; /* Takes remaining vertical space */
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden; /* Ensures iframe corners are rounded if iframe itself isn't */
+        }
+
+        #contentFrame {
+            width: 100%;
+            height: 100%; /* Fills the container */
+            border: none; /* Removes default iframe border */
+            display: block; /* Removes extra space below iframe */
+        }
+
+        /* Responsive adjustments (simple) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .hero {
+                padding: 40px 20px;
+            }
+            .hero h1 {
+                font-size: 2.2em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>My Projects</h2>
+            <p>Tseg's Code Creations</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="billofQ.html" target="contentFrame">BilloQ Calcu</a></li>
+                <li><a href="slider.html" target="contentFrame">Image Dik</a></li>
+                <li><a href="calcula.html" target="contentFrame">Calculator</a></li>
+                <li><a href="login.html" target="contentFrame">Login Form</a></li>
+                <li><a href="bulb.html" target="contentFrame">Bulb On/Off</a></li>
+                 <li><a href="animation.html" target="contentFrame">Animation</a></li>
+                <li><a href="hovereffect.html" target="contentFrame">Hovereffect</a></li>
+                <li><a href="form.html" target="contentFrame">FormSubmit</a></li>
+                <li><a href="spirograph.html" target="contentFrame">Spirograph</a></li>
+                  <li><a href="spiro.html" target="contentFrame">Spiro</a></li>
+                <!-- Add more links here if needed -->
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>Welcome to My TsegCode Showcase!</h1>
+            <p>Explore the various web components and mini-projects I've built. Click on a project in the sidebar to see it in action right here.</p>
+            <!-- <a href="#" class="cta-button">Get Started</a> -->
+        </section>
+
+        <div class="content-frame-container">
+            <!-- The iframe will load the content here -->
+            <!-- You can set an initial page if you want, e.g., src="multiple/welcome.html" -->
+            <!-- Or leave it blank to show hero first, and then content upon click -->
+            <iframe name="contentFrame" id="contentFrame" title="Project Content Area">
+                <!-- Fallback content for browsers that don't support iframes or if it's empty -->
+                <p>Your browser does not support iframes. Please click a link to open it in a new tab, or use a modern browser.</p>
+            </iframe>
+        </div>
+    </main>
+
+</body>
+</html>
